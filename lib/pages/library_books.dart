@@ -136,131 +136,138 @@ class _CSVDisplayState extends State<CSVDisplay> {
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 200,
-                          margin: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                const BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4, -4),
-                                    blurRadius: 8),
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(.3),
-                                    offset: const Offset(4, 4),
-                                    blurRadius: 8),
-                              ]),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                          vertical: 7,
-                                          horizontal: 7,
-                                        ),
-                                        padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                          color: HexColor("FFC0D9"),
-                                          borderRadius: const BorderRadius.only(
-                                            topRight: Radius.circular(8),
-                                            bottomLeft: Radius.circular(8),
+                    child: Scrollbar(
+                      child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 200,
+                            margin: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  const BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-4, -4),
+                                      blurRadius: 8),
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(.3),
+                                      offset: const Offset(4, 4),
+                                      blurRadius: 8),
+                                ]),
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            vertical: 7,
+                                            horizontal: 7,
                                           ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color:
-                                                    Colors.pink.withOpacity(.4),
-                                                offset: const Offset(-4, -4),
-                                                blurRadius: 10),
-                                            BoxShadow(
-                                                color:
-                                                    Colors.grey.withOpacity(.4),
-                                                offset: const Offset(4, 4),
-                                                blurRadius: 10),
-                                          ],
-                                        ),
-                                        child: Text(
-                                          "Si No: ${data[index]['SI.NO.']?.toString()}",
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color: HexColor("FFC0D9"),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(8),
+                                              bottomLeft: Radius.circular(8),
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.pink
+                                                      .withOpacity(.4),
+                                                  offset: const Offset(-4, -4),
+                                                  blurRadius: 10),
+                                              BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(.4),
+                                                  offset: const Offset(4, 4),
+                                                  blurRadius: 10),
+                                            ],
+                                          ),
+                                          child: Text(
+                                            "Si No: ${data[index]['SI.NO.']?.toString()}",
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    ElevatedButton(
-                                        style: const ButtonStyle(
-                                            elevation:
-                                                MaterialStatePropertyAll(0),
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.black),
-                                            foregroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.white)),
-                                        onPressed: () {},
-                                        child: const Text("Request this book"))
-                                  ],
-                                ),
-                                Center(
-                                  child: Text(
-                                    "Title: ${data[index]['TITLE OF THE BOOK']}",
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        const TextStyle(fontWeight: FontWeight.bold),
+                                      ElevatedButton(
+                                          style: const ButtonStyle(
+                                              elevation:
+                                                  MaterialStatePropertyAll(0),
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      Colors.black),
+                                              foregroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      Colors.white)),
+                                          onPressed: () {},
+                                          child:
+                                              const Text("Request this book"))
+                                    ],
                                   ),
-                                ),
-                                const Text(
-                                  "Author: ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                FittedBox(
-                                  fit: BoxFit.cover,
-                                  child: Text(
-                                    "${data[index]['AUTHORS']}",
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
-                                ),
-                                const Text(
-                                  "PUBLICATION: ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "${data[index]['PUBLICATION'] ?? 'null'}",
-                                  textAlign: TextAlign.center,
-                                ),
-                                Row(
-                                  children: [
-                                    const Text(
-                                      "Cost:",
+                                  Center(
+                                    child: Text(
+                                      "Title: ${data[index]['TITLE OF THE BOOK']}",
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      "${data[index]['COST'] == '_' || data[index]['COST'] == '-' ? 'nil' : data[index]['COST']}",
+                                  ),
+                                  const Text(
+                                    "Author: ",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  FittedBox(
+                                    fit: BoxFit.cover,
+                                    child: Text(
+                                      "${data[index]['AUTHORS']}",
                                       textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
                                     ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  const Text(
+                                    "PUBLICATION: ",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "${data[index]['PUBLICATION'] ?? 'null'}",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "Cost:",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "${data[index]['COST'] == '_' || data[index]['COST'] == '-' ? 'nil' : data[index]['COST']}",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
