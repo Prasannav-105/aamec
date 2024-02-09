@@ -34,6 +34,7 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
       'This Is Sample Circular',
       'All Students Must Write Co\'s PO\'s',
       'All The Students Must follow Dresscode',
+      'Who ever scored below average marks in IAT-1 They Are Asked To come with their parents '
     ],
     'event': [
       'This Is event',
@@ -48,18 +49,46 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("N E W S"),
+        title: Text(
+          "N E W S",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
+        backgroundColor: HexColor("#FF5B22"),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             AnimatedContainer(
+              margin: EdgeInsets.all(10),
               duration: Duration(milliseconds: 100),
-              decoration: BoxDecoration(),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(.2),
+                    offset: Offset(-5, -5),
+                    blurRadius: 8,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withOpacity(.2),
+                    offset: Offset(5, 5),
+                    blurRadius: 8,
+                  ),
+                ],
+              ),
               padding: EdgeInsets.all(12),
               height: 100,
               child: Row(
@@ -116,9 +145,7 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                          color: HexColor(
-                            "#FC6736",
-                          ).withOpacity(.4),
+                          color: Colors.black.withOpacity(.2),
                           offset: Offset(-4, 4),
                           blurRadius: 10)
                     ],

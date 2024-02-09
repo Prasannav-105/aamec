@@ -1,5 +1,10 @@
-import 'dart:async';
+// ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+import 'dart:math';
+import 'dart:ui';
+
+import 'package:aamec/pages/attendance_page.dart';
 import 'package:aamec/pages/chat_page.dart';
 import 'package:aamec/pages/events.dart';
 import 'package:aamec/pages/library_books.dart';
@@ -24,7 +29,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   List bannerDetails = [
     [
-      "Welcome To Department of Computer Science",
+      "WELCOME TO C S E",
     ],
     [
       "Vision",
@@ -41,7 +46,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ]
   ];
   List buttonData = [
-    ['chat', 'assets/chat.png'],
+    ['Attendance', 'assets/attendance.png'],
     ['events', 'assets/events.png'],
     ['library', 'assets/library_book.png'],
     ['marks', 'assets/marks.png'],
@@ -50,11 +55,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   List<Widget> pages = [
-    ChatPage(),
+    AttenddancePage(),
     const EventsPage(),
-   const CSVDisplay(),
+    const CSVDisplay(),
     MarksPage(),
-    const CustomMaterialPage(),
+    CustomMaterialPage(),
     NewsPage()
   ];
 
@@ -97,7 +102,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(.7),
+                    // gradient: LinearGradient(
+                    //     transform: GradientRotation(cos(pi) * sin(pi / 3)),
+                    // colors: [
+                    //   // HexColor("##2C69D1"),
+                    //   // HexColor("#0ABCF9"),
+                    // ],
+                    // begin: Alignment.topLeft,
+                    // end: Alignment.bottomRight),
                     borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(30),
                         bottomLeft: Radius.circular(30))),
@@ -109,6 +121,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Column(
                         children: [
                           const CustomAppBar(),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .25,
                             child: PageView.builder(
@@ -147,9 +162,39 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 width: double.infinity,
               ),
+              Align(
+                alignment: Alignment(-.8, 0),
+                child: Text.rich(
+                  TextSpan(
+                    text: "Welcome",
+                    style: TextStyle(
+                      letterSpacing: 3,
+                      fontSize: 22,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: " Prasanna v",
+                        style: TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 2,
+                            color: Colors.deepPurple),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 2,
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                ),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                width: double.infinity,
+              ),
               SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),

@@ -3,8 +3,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class PdfViewerPage extends StatefulWidget {
-  PdfViewerPage({super.key});
-
+  PdfViewerPage({super.key,required this.assetPath});
+  final assetPath;
   @override
   State<PdfViewerPage> createState() => _PdfViewerPageState();
 }
@@ -15,7 +15,7 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
     return Scaffold(
       appBar: AppBar(),
       body: SfPdfViewer.asset(
-        'assets/sample.pdf',
+        widget.assetPath,
       ),
     );
   }

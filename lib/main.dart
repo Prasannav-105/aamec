@@ -19,11 +19,14 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            scrollbarTheme: const ScrollbarThemeData(
-                thumbColor: MaterialStatePropertyAll(
-                  Colors.black,
-                ),
-                thickness: MaterialStatePropertyAll(5))),
+          scrollbarTheme: const ScrollbarThemeData(
+            thumbColor: MaterialStatePropertyAll(
+              Colors.black,
+            ),
+            thickness: MaterialStatePropertyAll(5),
+          ),
+        ),
+        darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: HomePage(),
       ),

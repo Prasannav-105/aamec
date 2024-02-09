@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -31,7 +30,7 @@ class CustomPageIndicator extends StatelessWidget {
                   width: index == currentPage ? 12 : 8,
                   decoration: BoxDecoration(
                     color: index == currentPage
-                        ? HexColor("#f6feff")
+                        ? HexColor("#32323E")
                         : Colors.grey,
                     shape: BoxShape.circle,
                   ),
@@ -51,34 +50,42 @@ class CustomAppBar extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(.5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(.2),
+                offset: const Offset(8, 8),
+                blurRadius: 8),
+          ],
+          color: Colors.black.withOpacity(.5),
           borderRadius: BorderRadius.circular(18)),
       height: 50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "assets/menu.png",
-              height: 25,
-              width: 25,
-              color: Colors.white,
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(
+          //     "assets/menu.png",
+          //     height: 25,
+          //     width: 25,
+          //     color: Colors.white,
+          //   ),
+          // ),
+          Center(
+            child: Text(
+              "AAMEC CSE",
+              style: TextStyle(color: Colors.white, letterSpacing: 2),
             ),
           ),
-          const Text(
-            "AAMEC CSE",
-            style: TextStyle(color: Colors.white, letterSpacing: 2),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "assets/notification.png",
-              height: 25,
-              width: 25,
-              color: Colors.white,
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(
+          //     "assets/notification.png",
+          //     height: 25,
+          //     width: 25,
+          //     color: Colors.white,
+          //   ),
+          // ),
         ],
       ),
     );

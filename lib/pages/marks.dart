@@ -12,12 +12,28 @@ class _MarksPageState extends State<MarksPage> {
   int touchedIndexiat1 = -1;
   int touchedIndexiat2 = -1;
   List<bool> _expanded = [false, false, false];
+  List<Color> _colors = [
+    Colors.deepPurple,
+    Colors.greenAccent,
+    Colors.yellow,
+    Colors.red
+  ];
+  List<String> subjects = [
+    'CS3551 Compiler Design',
+    'CS3591 Computer Networks',
+    'CB3591 Cyber Security',
+    'CS3454 Network Security'
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.primaries[4].shade400,
+          foregroundColor: Colors.white,
+          shadowColor: Colors.primaries[4],
           centerTitle: true,
+          elevation: 8,
           title: const Text("Internal Assesments"),
         ),
         body: SingleChildScrollView(
@@ -42,26 +58,46 @@ class _MarksPageState extends State<MarksPage> {
                         blurRadius: 8),
                   ],
                 ),
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
                   children: [
-                    Text(
-                      "this is not a dynamic data*",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.red),
+                    Container(
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          "assets/book-3.jpg",
+                          // fit: BoxFit.cover,
+                          alignment: Alignment.centerRight,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      height: 15,
+                    // Container(
+                    //   width: double.infinity,
+                    //   color: Colors.black.withOpacity(.2),
+                    // ),
+                    const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "  this is not a dynamic data*",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "  Name:Prasanna V",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text("  Register No :820421104045",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      ],
                     ),
-                    Text(
-                      "Name:Prasanna V",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text("Register No :820421104045",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -75,33 +111,68 @@ class _MarksPageState extends State<MarksPage> {
                   ExpansionPanel(
                     headerBuilder: (context, isExpanded) {
                       return const Center(
-                          child: Text(
-                        "IAT-1 Result Summary",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ));
+                        child: Text("IAT-1 Result Summary",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      );
                     },
                     body: Container(
-                      alignment: Alignment.center,
-                      height: 400,
+                      alignment: Alignment.topCenter,
+                      height: MediaQuery.of(context).size.height,
+                      // color: Colors.black.withOpacity(.19),
                       width: double.infinity,
-                      child: PieChart(
-                        PieChartData(
-                          pieTouchData: PieTouchData(
-                              touchCallback: (event, pieTouchResponse) {
-                            setState(() {
-                              if (!event.isInterestedForInteractions ||
-                                  pieTouchResponse == null ||
-                                  pieTouchResponse.touchedSection == null) {
-                                touchedIndexiat1 = -1;
-                                return;
-                              }
-                              touchedIndexiat1 = pieTouchResponse
-                                  .touchedSection!.touchedSectionIndex;
-                            });
-                          }),
-                          centerSpaceRadius: 0,
-                          sections: showingSectionsIat1(),
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              // color: Colors.black.withOpacity(.5),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            margin: EdgeInsets.all(10),
+                            child: PieChart(
+                              PieChartData(
+                                pieTouchData: PieTouchData(
+                                    touchCallback: (event, pieTouchResponse) {
+                                  setState(() {
+                                    if (!event.isInterestedForInteractions ||
+                                        pieTouchResponse == null ||
+                                        pieTouchResponse.touchedSection ==
+                                            null) {
+                                      touchedIndexiat2 = -1;
+                                      return;
+                                    }
+                                    touchedIndexiat2 = pieTouchResponse
+                                        .touchedSection!.touchedSectionIndex;
+                                  });
+                                }),
+                                centerSpaceRadius: 0,
+                                sections: showingSectionsIat2(),
+                              ),
+                            ),
+                          ),
+                          ...List.generate(
+                            4,
+                            (index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width: 10,
+                                    color: _colors[index],
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(subjects[index])
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     isExpanded: _expanded[0],
@@ -115,27 +186,63 @@ class _MarksPageState extends State<MarksPage> {
                       );
                     },
                     body: Container(
-                      alignment: Alignment.center,
-                      height: 400,
+                      alignment: Alignment.topCenter,
+                      height: MediaQuery.of(context).size.height,
+                      // color: Colors.black.withOpacity(.19),
                       width: double.infinity,
-                      child: PieChart(
-                        PieChartData(
-                          pieTouchData: PieTouchData(
-                              touchCallback: (event, pieTouchResponse) {
-                            setState(() {
-                              if (!event.isInterestedForInteractions ||
-                                  pieTouchResponse == null ||
-                                  pieTouchResponse.touchedSection == null) {
-                                touchedIndexiat2 = -1;
-                                return;
-                              }
-                              touchedIndexiat2 = pieTouchResponse
-                                  .touchedSection!.touchedSectionIndex;
-                            });
-                          }),
-                          centerSpaceRadius: 0,
-                          sections: showingSectionsIat2(),
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              // color: Colors.black.withOpacity(.5),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            margin: EdgeInsets.all(10),
+                            child: PieChart(
+                              PieChartData(
+                                pieTouchData: PieTouchData(
+                                    touchCallback: (event, pieTouchResponse) {
+                                  setState(() {
+                                    if (!event.isInterestedForInteractions ||
+                                        pieTouchResponse == null ||
+                                        pieTouchResponse.touchedSection ==
+                                            null) {
+                                      touchedIndexiat2 = -1;
+                                      return;
+                                    }
+                                    touchedIndexiat2 = pieTouchResponse
+                                        .touchedSection!.touchedSectionIndex;
+                                  });
+                                }),
+                                centerSpaceRadius: 0,
+                                sections: showingSectionsIat2(),
+                              ),
+                            ),
+                          ),
+                          ...List.generate(
+                            4,
+                            (index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width: 10,
+                                    color: _colors[index],
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(subjects[index])
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     isExpanded: _expanded[1],
@@ -159,7 +266,7 @@ class _MarksPageState extends State<MarksPage> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Colors.deepPurple,
+            color: _colors[0],
             value: 40,
             title: '40%',
             radius: radius,
@@ -172,7 +279,7 @@ class _MarksPageState extends State<MarksPage> {
           );
         case 1:
           return PieChartSectionData(
-            color: Colors.greenAccent,
+            color: _colors[1],
             value: 30,
             title: '30%',
             radius: radius,
@@ -185,7 +292,7 @@ class _MarksPageState extends State<MarksPage> {
           );
         case 2:
           return PieChartSectionData(
-            color: Colors.yellow,
+            color: _colors[2],
             value: 15,
             title: '15%',
             radius: radius,
@@ -198,7 +305,7 @@ class _MarksPageState extends State<MarksPage> {
           );
         case 3:
           return PieChartSectionData(
-            color: Colors.red,
+            color: _colors[3],
             value: 15,
             title: '15%',
             radius: radius,
